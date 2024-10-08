@@ -16,7 +16,6 @@ def canUnlockAll(boxes):
     for box in boxes:
         key_box[str(idx)] = box
         idx += 1
-    print(key_box)
 
     stack = [0]
     while len(stack) > 0:
