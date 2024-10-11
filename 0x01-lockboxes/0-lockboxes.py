@@ -11,18 +11,13 @@ def canUnlockAll(boxes):
     0 to n - 1 and each box may contain keys to the other boxes.
     """
     opened = set()
-    key_box = {}
-    idx = 0
-    for box in boxes:
-        key_box[str(idx)] = box
-        idx += 1
 
     stack = [0]
     while len(stack) > 0:
-        current = stack.pop()
-        opened.add(current)
-        for key in key_box[str(current)]:
-            if key in opened or str(key) not in key_box:
-                continue
+        current = stack.pop()  # get current stack
+        opened.add(current)  # add current to the new set
+        for key in boxes[current]:
+            if key in opened or key > len(boxes) - 1:  # to avoid infinite loop
+                continue  # skip and go to the next one
             stack.append(key)
     return len(opened) == len(boxes)
