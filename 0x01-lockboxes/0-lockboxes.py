@@ -17,7 +17,10 @@ def canUnlockAll(boxes):
         current = stack.pop()  # get current stack
         opened.add(current)  # add current to the new set
         for key in boxes[current]:
-            if key in opened or key > len(boxes) - 1:  # to avoid infinite loop
+            # to avoid infinite loop, check if key in opened or in stack
+            if key in opened or key in stack or key > len(boxes) - 1:
                 continue  # skip and go to the next one
             stack.append(key)
+            if len(stack) == len(boxes) - 1:
+                return True
     return len(opened) == len(boxes)
